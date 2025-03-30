@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('chercheurs_id')->primary()->autoIncrement();
             $table->string('photo')->nullable();
             $table->text('biographie')->nullable();
-            $table->string('cv')->nullable();
+            $table->text('cv')->nullable();
             $table->string('google_scholar')->nullable();
             $table->string('linkedin')->nullable();
             $table->unsignedBigInteger('users_id');
