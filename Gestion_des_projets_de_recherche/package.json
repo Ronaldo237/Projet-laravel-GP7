@@ -20,7 +20,8 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.7.2",
         "@popperjs/core": "^2.11.8",
-        "bootstrap": "^5.3.3",
+        "@types/bootstrap": "^5.2.10",
+        "bootstrap": "^5.3.5",
         "daisyui": "^4.12.23"
     }
 }
