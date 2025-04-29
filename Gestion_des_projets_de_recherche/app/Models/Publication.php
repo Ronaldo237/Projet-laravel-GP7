@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Publications extends Model
+class Publication extends Model
 {
     use HasFactory;
 
@@ -28,7 +28,7 @@ class Publications extends Model
 
     public function publications()
     {
-        return $this->hasMany(Publications::class, "publications_id");
+        return $this->hasMany(Publication::class, "publications_id");
     }
 
 

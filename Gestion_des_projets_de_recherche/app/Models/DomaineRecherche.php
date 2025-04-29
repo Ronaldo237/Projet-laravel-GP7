@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ModelRecherche extends Model
+class DomaineRecherche extends Model
 {
     use HasFactory;
 
@@ -20,9 +20,9 @@ class ModelRecherche extends Model
         "nom" ,
     ];
 
-    public function personnel()
+    public function ModelRecherche()
     {
-        return $this->hasMany(ModelRecherche::class, "domaines_recherche_id");
+        return $this->hasMany(DomaineRecherche::class, "domaines_recherche_id");
     }
 
 
