@@ -23,8 +23,8 @@ class PublicationRequest extends FormRequest
     {
         return [
 
-            'chercheurs_id' => 'required',
-            'titre' => 'required|max:255',
+           
+            'titre' => 'required',
             'resume' => 'required|max:1000',
             'lien' => 'required',
             'domaines_recherche_id' => 'required',

@@ -47,13 +47,27 @@ public function show(){
     $publication = DB::table('Publications')->get();
     return view('Publications.show',compact('publication'));
 
-} 
+}
 
 public function put($id){
     $publication = DB::table('publications')->where('publications_id',$id)->first();
     // $domaines_recherche = DB::table('domaines_recherche')->get();
     // $auteurs = DB::table('chercheurs')->get();
     return view('Publications.update',compact('publication','domaines_recherche','auteurs'));
+}
+
+public function destroy($id){
+
+     try {
+            DB::beginTransaction();
+            Publication::destroy($id);
+            DB::commit();
+            return redirect()->with('success', 'Publication Supprimer avec success');
+     } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Echec lors de la suppression d\'une publication ');
+     }
+
 }
 
 

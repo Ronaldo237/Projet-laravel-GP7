@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Projet de recherche</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -30,6 +30,7 @@
         <section class="flex justify-center items-center min-h-screen bg-gray-100">
 
             @yield('contenu')
+
 
         </section>
 

@@ -40,4 +40,12 @@ class ChercherController extends Controller
         $chercheurs = DB::table('chercheurs')->get();
         return view('Chercheurs.show', compact('chercheurs'));
     }
+
+
+    public function destroy(string $id)
+    {
+        Chercheur::destroy($id);
+        return redirect()->route("Chercheurs.show");
+    }
+
 }

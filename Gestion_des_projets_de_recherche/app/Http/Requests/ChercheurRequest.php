@@ -23,13 +23,15 @@ class ChercheurRequest extends FormRequest
     {
         return [
             'speudo' => 'required|string|max:255',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            //'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'required',
             'biographie' => 'nullable|string',
-            'cv' => 'nullable|file|mimes:pdf|max:2048',
+            //'cv' => 'nullable|file|mimes:pdf|max:2048',
+            'cv' => 'required',
             'google_scholar' => 'nullable|url',
             'linkedin' => 'nullable|url',
-            'user_id' => 'required|exists:users,id',
-            'domaine_recherche_id' => 'required|exists:domaines_recherche,id',
+            'user_id' => 'exists:users,id',
+            'domaine_recherche_id' => 'exists:domaines_recherche,id',
         ];
     }
 

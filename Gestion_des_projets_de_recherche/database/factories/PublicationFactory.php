@@ -17,11 +17,11 @@ class PublicationFactory extends Factory
     public function definition(): array
     {
         return [
-            'chercheurs_id' => fake()->randomNumber(1, 20),,
+            'chercheurs_id' => fake()->numberBetween(1, 20),
             'titre' => $this->faker->sentence,
             'resume' => $this->faker->paragraph,
             'lien' => $this->faker->url,
-            'domaines_recherche_id' => fake()->randomNumber(1, 20),
+            'domaines_recherche_id' => fake()->numberBetween(1, 20),
             'fichier_pdf' => $this->faker->url,
         ];
     }
