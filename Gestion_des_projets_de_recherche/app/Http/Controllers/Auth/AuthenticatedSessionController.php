@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +26,26 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Redirection basée sur le rôle
+
+        if (!session()->has('user_id')) {
+            return redirect()->route('login')->withErrors(['email' => 'Utilisateur non trouvé.']);
+        }
+            $user = User::find(session('user_id'));
+            $role = $user->role;
+
+            if ($role === 'Admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($role === 'chercheur') {
+                return redirect()->route('chercheur.dashboard');
+            } else {
+                return redirect()->route('visiteur.dashboard');
+            }
+
+
+        //return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

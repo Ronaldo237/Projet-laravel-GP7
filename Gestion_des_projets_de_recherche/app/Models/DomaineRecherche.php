@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class DomaineRecherche extends Model
 {
@@ -24,7 +26,4 @@ class DomaineRecherche extends Model
     {
         return $this->hasMany(DomaineRecherche::class, "domaines_recherche_id");
     }
-
-
-
 }

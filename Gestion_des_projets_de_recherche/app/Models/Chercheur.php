@@ -8,34 +8,40 @@ use Illuminate\Database\Eloquent\Model;
 class Chercheur extends Model
 {
     use HasFactory;
-
-
     protected $table = 'chercheurs';
-    protected $primarykey = 'chercheurs_id';
-    protected $increment = true;
-    //protected $timestamps = true;
+    protected $primaryKey = 'chercheurs_id'; // correction ici
+    public $incrementing = true;             // correction ici
+    public $timestamps = true;               // réactivation des timestamps
 
     protected $fillable = [
-
-        "chercheurs_id",
-        "speudo",
-        "specialite",
-        "laboratoire",
-        "photo",
-        "biographie",
-        "cv",
-        "google_scholar",
-        "linkedin",
-        "users_id",
-        "domaines_recherche_id",
-
+        'photo',
+        'biographie',
+        'cv',
+        'google_scholar',
+        'linkedin',
+        'users_id',
+        'domaines_recherche_id',
     ];
 
-    public function Chercheurs()
+    // Relations
+
+    public function user()
     {
-        return $this->hasMany(Chercheur::class, "chercheurs_id");
+        return $this->belongsTo(User::class, 'users_id');
     }
-    //
 
+    public function domaine()
+    {
+        return $this->belongsTo(DomaineRecherche::class, 'domaine_recherche_id');
+    }
 
+    public function publications()
+    {
+        return $this->hasMany(Publication::class, 'chercheur_id');
+    }
+
+    public function projets()
+    {
+        return $this->hasMany(Projets_Recherche::class, 'chercheur_id');
+    }
 }
