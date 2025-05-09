@@ -1,6 +1,6 @@
 @extends("welcome")
 @section('contenu')
-<div class="max-w-4xl mx-auto py-10 px-4">
+<div class="max-w-4xl mx-auto py-10 px-4 w-full">
     <!-- Section bienvenue -->
     <div class="bg-blue-100 p-6 rounded-xl shadow-sm mb-8 text-center">
         <h1 class="text-3xl font-bold text-blue-800 mb-2">
@@ -26,7 +26,7 @@
 
         <div class="flex space-x-4">
             @if (!empty($chercheurs) && !empty($chercheurs->biographie))
-            <a href="{{ route('chercheurs.create') }}"
+            <a href="{{ route('chercheurs.edit', $chercheurs) }}"
                class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">
                Modifier mon Profil
             </a>
@@ -44,21 +44,24 @@
     <div class="bg-white p-6 rounded-xl shadow-md">
         <h2 class="text-2xl font-semibold mb-4 text-gray-800">Mes Recherches</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a href="{{ route('chercheurs.create') }}"
+            <a href="{{ route('projet.recherche') }}"
                class="block bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 text-center rounded-lg">
-               Voir toutes mes recherches
+               Gerer mes recherches
             </a>
+
             <a href="{{ route('chercheurs.create') }}"
                class="block bg-green-500 hover:bg-green-600 text-white font-semibold py-3 text-center rounded-lg">
-               Ajouter une nouvelle recherche
+               Gerer mes publications
             </a>
+
             <a href="{{ route('chercheurs.create') }}"
                class="block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 text-center rounded-lg">
-               Modifier une recherche
+               Gerer mes projets
             </a>
+
             <a href="{{ route('chercheurs.create') }}"
                class="block bg-red-500 hover:bg-red-600 text-white font-semibold py-3 text-center rounded-lg">
-               Supprimer une recherche
+                Gerer mes collaborations
             </a>
         </div>
     </div>

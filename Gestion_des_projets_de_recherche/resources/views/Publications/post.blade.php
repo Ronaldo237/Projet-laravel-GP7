@@ -30,21 +30,7 @@
                         @endif
 
 
-                        <div class="form-group">
-                            <label for="auteur">Auteur</label>
-                            <select name="chercheurs_id" id="auteur" class="form-control">
-                                <option value="">-- Sélectionnez un Auteur --</option>
-                                @foreach ($auteurs as $auteur)
-                                    <option value="{{ $auteur->chercheurs_id }}">{{ $auteur->speudo }}</option>
-                                    </option>
-                                @endforeach
-                            </select>
-
-                            @error('chercheurs_id')
-                                <p class="text text-danger">{{$message}}</p>
-                            @enderror
-
-                        </div>
+                        
 
                         <div class="form-group">
                             <label for="titre" class="label-form">Titre</label>

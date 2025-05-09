@@ -16,25 +16,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 
-        {{-- <!-- Styles / Scripts -->
+        <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @else
             @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @endif --}}
+        @endif
     </head>
     <body>
 
         @include('profile.partials.header')
 
-        <section class="flex justify-center items-center min-h-screen bg-gray-100">
-
+        <section class="flex justify-center min-h-screen w-full bg-gray-100 ">
             @yield('contenu')
-
-
         </section>
 
-        @include('profile.partials.footer')
+        {{-- @include('profile.partials.footer') --}}
 
         <link rel="stylesheet" href="{{asset('js/bootstrap.bundle.js')}}">
     </body>

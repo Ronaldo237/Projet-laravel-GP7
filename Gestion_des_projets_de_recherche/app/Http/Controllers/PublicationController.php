@@ -6,13 +6,15 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Publication;
 use App\Http\Requests\PublicationRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Chercheur;
 
 class PublicationController extends Controller
 {
     public function create()
     {
         $domaines_recherche = DB::table('domaines_recherche')->get();
-        $auteurs = DB::table('chercheurs')->get();
+        $auteurs = Auth::user()->chercheur;
         $publication = DB::table('publications')->get();
         return view('Publications.post',compact('domaines_recherche','auteurs','publication'));
     }
@@ -23,14 +25,14 @@ public function store(PublicationRequest $request){
     try {
 
         $requestvalid = $request->validated();
-        $publication =  new Publication();
+        $requestvalid['chercheurs_id'] = Auth::user()->chercheur->chercheurs_id;
 
         DB::beginTransaction();
         Publication::create($requestvalid);
         DB::commit();
-       // $publication = Publications::all();
 
-        return redirect('Publications.show')->with('success','Enregistrement reuissi');
+
+        return redirect('list/publication')->with('success','Enregistrement reuissi');
 
     } catch (\Throwable $th) {
 

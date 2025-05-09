@@ -37,7 +37,7 @@ class ChercherController extends Controller
 
     public function show()
     {
-        $chercheurs = DB::table('chercheurs')->get();
+        $chercheurs = Chercheur::with('user')->get();
         return view('Chercheurs.show', compact('chercheurs'));
     }
 

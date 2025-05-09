@@ -16,22 +16,27 @@ class Projets_Recherche extends Model
     //protected $timestamps = true;
 
     protected $fillable = [
-        
+
         "projets_recherche_id",
-         "chercheurs_id",
-         "titre",
-         "description",
-          "financement",
-           "etat",
-            "date_debut",
-             "date_fin",
-              "equipe_recherche",
+        "chercheurs_id",
+        "titre",
+        "description",
+        "financement",
+        "etat",
+        "date_debut",
+        "date_fin",
+        "equipe_recherche",
 
     ];
 
     public function Projets_Recherche()
     {
         return $this->hasMany(Projets_Recherche::class, "projets_recherche_id");
+    }
+
+    public function chercheur()
+    {
+        return $this->belongsTo(Chercheur::class, 'chercheur_id');
     }
 
 }

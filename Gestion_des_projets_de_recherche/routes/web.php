@@ -2,24 +2,25 @@
 
 use App\Http\Controllers\ChercherController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfileControllerpers;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VisiteurController;
 use App\Http\Controllers\ChercheurController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\Recherche;
 
 // Dashboard (protégé par auth)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', function () {return view('index');})->name('home');
+
+Route::get('/projet/recherche', [Recherche::class, 'index'])->name('projet.recherche');
+Route::get('/projet/recherche/create', [Recherche::class, 'create'])->name('create.recherche');
+Route::get('/create/recherche', [Recherche::class, 'store'])->name('recherche.store');
+
 
 
 Route::get('/create/publication', [PublicationController::class, 'create'])->name('create.publication');
@@ -56,6 +57,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/page/chercheurs', [ChercheurController::class, 'index'])->name('chercheurs.index');
 Route::get('/chercheurs/create', [ChercheurController::class, 'create'])->name('chercheurs.create');
+Route::get('/chercheurs/{id}/edit', [ChercheurController::class, 'edit'])->name('chercheurs.edit');
+Route::put('/chercheurs/{id}', [ChercheurController::class, 'update'])->name('chercheurs.update');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/profil/chercheurs', [ChercheurController::class, 'store'])->name('chercheurs.store');
@@ -84,4 +87,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';

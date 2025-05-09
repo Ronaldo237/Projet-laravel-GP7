@@ -120,6 +120,20 @@
         </div>
 
         <div>
+            <label class="block text-gray-700 mb-2">specialité</label>
+            <input type="text" name="specialite" class="block w-full text-gray-700 border rounded p-2" placeholder="votre specialisation">
+        </div>
+
+        <div>
+            <label class="block text-gray-700 mb-2">Laboratoire</label>
+            <select name="laboratoire" required class="block w-full text-gray-700 border rounded p-2">
+                <option value="laboratoire 1">laboratoire 1</option>
+                <option value="laboratoire 2">laboratoire 2</option>
+                <option value="laboratoire 3">laboratoire 3</option>
+            </select>
+        </div>
+
+        <div>
             <label class="block text-gray-700 mb-2">Lien Google Scholar</label>
             <input type="url" name="google_scholar" class="block w-full text-gray-700 border rounded p-2" placeholder="https://scholar.google.com/...">
         </div>

@@ -17,6 +17,8 @@ class Chercheur extends Model
         'photo',
         'biographie',
         'cv',
+        'laboratoire',
+        'specialite',
         'google_scholar',
         'linkedin',
         'users_id',

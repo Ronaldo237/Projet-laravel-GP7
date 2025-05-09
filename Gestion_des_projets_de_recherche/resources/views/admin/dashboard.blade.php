@@ -55,11 +55,6 @@
         </ul>
     </div>
 
-    <div class="mt-3 w-full">
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="p-2 w-full block bg-red-500 hover:bg-red-600 text-white font-semibold py-3 text-center rounded-lg">Se déconnecter</button>
-        </form>
-    </div>
+
 </div>
 @endsection

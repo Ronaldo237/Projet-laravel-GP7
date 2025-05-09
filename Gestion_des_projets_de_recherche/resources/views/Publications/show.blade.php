@@ -5,8 +5,13 @@
 
         <h2 class="text-center mt-2">Listes Des Publications Disponibles </h2>
 
-        <a href="/create/publication" type="button" class="btn btn-primary"> <i class="fa fa-plus"></i> Ajouter
-        </a>
+        @auth
+            @if (Auth::user()->role === 'chercheur')
+            <a href="/create/publication" type="button" class="btn btn-primary"> <i class="fa fa-plus"></i> Ajouter
+            </a>
+            @endif
+        @endauth
+
         <hr>
 
         <div class="container mt-4">
@@ -52,5 +57,5 @@
         </div>
 
     </div>
-    
+
 @endsection
