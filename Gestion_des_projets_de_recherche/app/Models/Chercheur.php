@@ -20,15 +20,15 @@ class Chercheur extends Model
         'cv',
         'google_scholar',
         'linkedin',
-        'user_id',
-        'domaine_recherche_id',
+        'users_id',
+        'domaines_recherche_id',
     ];
 
     // Relations
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function domaine()
@@ -38,11 +38,11 @@ class Chercheur extends Model
 
     public function publications()
     {
-        return $this->hasMany(Publication::class, 'chercheur_id');
+        return $this->hasMany(Publications::class, 'chercheur_id');
     }
 
     public function projets()
     {
-        return $this->hasMany(ProjetRecherche::class, 'chercheur_id');
+        return $this->hasMany(Projets_Recherche::class, 'chercheur_id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\DomaineRecherche;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use  App\Models\Chercheur;
 class ChercheurController extends Controller
 {
@@ -12,7 +13,8 @@ class ChercheurController extends Controller
      */
     public function index()
     {
-        $chercheurs = Chercheur::with('user')->get();
+
+        $chercheurs = Auth::user()->chercheur;
         return view('chercheurs.index', compact('chercheurs'));
     }
 
@@ -21,10 +23,8 @@ class ChercheurController extends Controller
      */
     public function create()
     {
-        $users = User::all();
         $domaines = DomaineRecherche::all();
-
-    return view('chercheurs.create', compact('users', 'domaines'));
+        return view('chercheurs.create', compact('domaines'));
     }
 
     /**
@@ -33,37 +33,40 @@ class ChercheurController extends Controller
     public function store(Request $request)
     {
 
+
         $request->validate([
-            'photo' => 'nullable|image|max:2048',
-            'biographie' => 'required|string',
-            'specialisation' => 'required|string|max:255',
-            'lien_google_scholar' => 'nullable|url',
-            'lien_linkedin' => 'nullable|url',
-            'cv' => 'nullable|file|mimes:pdf|max:2048',
+        'photo' => 'nullable|image|max:2048',
+        'biographie' => 'nullable|string',
+        'cv' => 'nullable|mimes:pdf|max:2048',
+        'google_scholar' => 'nullable|url',
+        'linkedin' => 'nullable|url',
+        'domaines_recherche_id' => 'required|exists:domaines_recherche,domaines_recherche_id',
         ]);
 
-        $chercheur = new Chercheur();
-        $chercheur->user_id = 1; // User prédéfini
-        $chercheur->domaine_recherche_id = 2; // Domaine prédéfini
+        // Gestion de l'upload de la photo
+    $photoPath = null;
+    if ($request->hasFile('photo')) {
+        $photoPath = $request->file('photo')->store('photos', 'public');
+    }
 
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $chercheur->photo = $photoPath;
-        }
 
-        if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('cv', 'public');
-            $chercheur->cv = $cvPath;
-        }
+    $cvPath = null;
+    if ($request->hasFile('cv')) {
+        $cvPath = $request->file('cv')->store('cvs', 'public');
+    }
 
-        $chercheur->biographie = $request->biographie;
-        $chercheur->specialisation = $request->specialisation;
-        $chercheur->lien_google_scholar = $request->lien_google_scholar;
-        $chercheur->lien_linkedin = $request->lien_linkedin;
+        // Création du Chercheur
+            Chercheur::create([
+                'photo' => $photoPath,
+                'biographie' => $request->biographie,
+                'cv' => $cvPath,
+                'google_scholar' => $request->google_scholar,
+                'linkedin' => $request->linkedin,
+                'users_id' => Auth::id(), // On lie au user connecté
+                'domaines_recherche_id' => $request->domaines_recherche_id,
+            ]);
 
-        $chercheur->save();
-
-        return redirect()->route('chercheurs.index')->with('success', 'Chercheur ajouté avec succès.');
+        return redirect()->route('chercheur.dashboard')->with('success', 'profil ajouté avec succès.');
 
     }
 

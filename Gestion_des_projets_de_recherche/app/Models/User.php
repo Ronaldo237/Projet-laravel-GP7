@@ -17,6 +17,11 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+     protected $primaryKey = 'users_id'; // Ton primary key custom
+     public $incrementing = true; // auto-incrément
+     //protected $keyType = 'unsignedBigInteger';
+
     protected $fillable = [
         'name',
         'email',
@@ -45,5 +50,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function chercheur()
+    {
+        return $this->hasOne(Chercheur::class, 'users_id');
     }
 }

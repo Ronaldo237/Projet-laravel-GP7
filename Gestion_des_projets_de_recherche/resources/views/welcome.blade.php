@@ -18,7 +18,7 @@
         @endif
     </head>
     <body>
-        <section class="flex justify-center items-center min-h-screen bg-gray-100">
+        <section class="bg-gray-200">
             @yield('contenu')
         </section>
     </body>
